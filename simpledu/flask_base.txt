@@ -1,0 +1,15 @@
+#安装flask项目需要的包
+sudo pip3 install flask flask-sqlalchemy mysqlclient
+#修改mysql /etc/mysql/my.cnf
+[client]
+default-character-set = utf8
+[mysqld]
+character-set-server = utf8
+[mysql]
+default-character-set = utf8
+3 进入数据库
+$ sudo service mysql start
+$ mysql -uroot
+4 创建数据库待用
+mysql> create database simpledu;
+
