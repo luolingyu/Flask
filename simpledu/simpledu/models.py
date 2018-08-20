@@ -1,25 +1,18 @@
 from datetime import datetime
-from flask import Flask, render_template
 from flask_sqlalchey import SQLAlchemy
 
-app = Flask(__name__)
 
-app.config.update(dict(
-    SECRET_KEY = 'very secret key',
-    SQLALCHEMY_DATABASE_URI='mysql+mysqldb://root@localhost:3306/simpledu?charset=utf8'
-    ))
 
-db = SQLAlchemy(db)
-
+db = SQLAlchemy()
 
 class User(db.Model):
     __tablename__ = 'user'
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(32), unique=True, index=True, nullable=False)
-    publish_courses = db.relathionship('Course')
+    publish_courses = db.relationship('Course')
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, default=DateTime.utcnow, onupdate=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
 
 
@@ -32,23 +25,5 @@ class Course(db.Model):
     author = db.relationship('User', userlist=False)
     publish_courses = db.relathionship('Course')
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-
-@app.route('/')
-def index():
-    courses = Course.query.all()
-    return render_template('index.html', courses=courses)
-
-
-@app.route('/admin')
-def admin_index():
-    return 'admin'
-
-
-if __name__ == '__main__':
-    app.run()
-
-
-
-
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
