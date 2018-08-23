@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template
 from simpledu.models import Course
+from simpledu.forms import LoginForm, RegisterForm
 
 
 #省略url_prefix,默认''/''
@@ -14,11 +15,13 @@ def index():
 
 @front.route('/login')
 def login():
+    form = LoginForm()
     return render_template('login.html')
 
 
 @front.route('/register')
 def register():
+    form = RegisterForm()
     return render_template('register.html')
 
 
