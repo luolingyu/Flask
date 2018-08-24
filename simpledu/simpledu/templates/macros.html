@@ -1,0 +1,28 @@
+{% macro render_form(form,url) %}
+<form method="POST" action="{{ url }}">
+{{ form.csrf_token }}
+{% for field in form %}
+  {% if field.type == 'CSRFTokenField' %}
+  {{ '' }}
+  {% elif field.type == 'SubmitField'%}
+  {{ form.submit(class='btn btn-primary', type="submit")}}
+  {% elif field.type == 'BooleanField' %}
+  <div class="checkbox">
+    <label>{{ field() }} {{ field.label.text }}</label>
+  </div>
+  {% else %}
+  <!-- 表单错误信息显示-->
+  <div class="form-group" {% if field.errors %}has-error{% endif %}>
+    {{ field.label }} {{ field(class="form-control") }}
+     <!--当errors不为空，遍历显示每一个error-->
+     {% if field.errors %}
+       {% for error in field.errors %}
+       <!--根据bootstrap样式错误信息显示先类-->
+       </span class="help-block">{{ error }}</span>
+       {% endfor %}
+     {% endif %}
+  </div>
+{% endif %}
+{% endfor %}
+</form>>
+{% endmacro %}

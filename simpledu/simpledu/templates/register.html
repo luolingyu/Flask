@@ -1,6 +1,8 @@
 {% extends "base.html" %}
+{% from "macros.html" import render_form %}
 {% block title %}Register{% endblock %}
 {% block body %}
+<!--注释并传入宏渲染
 <h2>注册</h2>
   <form method="POST" action="{{ url_for('front.register') }}">
       {{ form.csrf_token }}
@@ -22,4 +24,10 @@
 
 {{ form.submit(class='btn btn-primary', type='submit') }}
 </form>
+-->
+
+<div class="form">
+<h2>注册</h2>
+{{ render_form(form, url_for('front.register' )) }}
+</div>
 {% endblock %}
